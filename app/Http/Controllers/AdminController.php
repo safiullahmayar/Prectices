@@ -51,9 +51,23 @@ class AdminController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        $id = auth::user()->id;
+        $userData = user::find($id);
+        $userData->name = $request->name;
+        $userData->username = $request->username;
+        $userData->email = $request->email;
+        $userData->phone = $request->phone;
+        $userData->address = $request->address;
+        if($request->Hasfile('image')){
+            $image=$request->file('image');
+            $imageName=date('YmDHi').$image->getclientOriginalName();
+            $image->move(public_path('upload/admin_image'),$imageName);
+            $userData->image=$imageName;
+        }
+        $userData->save();
+    return redirect()->back();
     }
 
     /**
@@ -76,8 +90,8 @@ class AdminController extends Controller
     }
     public function admin_profile()
     {
-        $id=Auth::user()->id;
-        $userData=User::find($id);
-        return view('admin.admin_profile',compact('userData'));
+        $id = Auth::user()->id;
+        $userData = User::find($id);
+        return view('admin.admin_profile', compact('userData'));
     }
 }

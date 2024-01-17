@@ -1,5 +1,6 @@
 @extends('admin.layouts.app')
 @section('main')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <div class="main-wrapper">
 
         <!-- partial:partials/_sidebar.html -->
@@ -11,48 +12,34 @@
             <!-- partial:partials/_navbar.html -->
             @include('admin.layouts.header')
             <div class="page-content">
+
+
                 <div class="row profile-body">
                     <!-- left wrapper start -->
-                    <div class="d-none d-md-block col-md-4 col-xl-3 left-wrapper">
-                        <div class="card rounded">
+                    <div class="d-none d-md-block col-md-4 col-xl-4 left-wrapper">
+                        <div class="card rounded w-100">
                             <div class="card-body">
-                                <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <h6 class="card-title mb-0">About</h6>
-                                    <div class="dropdown">
-                                        <a type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
-                                            aria-haspopup="true" aria-expanded="false">
-                                            <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i
-                                                    data-feather="edit-2" class="icon-sm me-2"></i> <span
-                                                    class="">Edit</span></a>
-                                            <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i
-                                                    data-feather="git-branch" class="icon-sm me-2"></i> <span
-                                                    class="">Update</span></a>
-                                            <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i
-                                                    data-feather="eye" class="icon-sm me-2"></i> <span class="">View
-                                                    all</span></a>
-                                        </div>
-                                    </div>
+                                <div class="d-flex align-items-center justify-content-center mb-2">
+
+                                    <img src="{{ !empty($userData->image) ? url('upload/admin_image/'.$userData->image) : url('upload/no_image.jpg') }}"
+                                        alt="" class="rounded-circle " width="50px" height="50px">
                                 </div>
-                                <p>Hi! I'm Amiah the Senior UI Designer at NobleUI. We hope you enjoy the design and
-                                    quality of Social.</p>
+                                <p></p>
                                 <div class="mt-3">
-                                    <label class="tx-11 fw-bolder mb-0 text-uppercase">Joined:</label>
-                                    <p class="text-muted">November 15, 2015</p>
+                                    <label class="tx-11 fw-bolder mb-0 text-uppercase">Name</label>
+                                    <p class="text-muted">{{ $userData->name }}</p>
                                 </div>
                                 <div class="mt-3">
-                                    <label class="tx-11 fw-bolder mb-0 text-uppercase">Lives:</label>
-                                    <p class="text-muted">New York, USA</p>
+                                    <label class="tx-11 fw-bolder mb-0 text-uppercase">Email</label>
+                                    <p class="text-muted">{{ $userData->email }}</p>
                                 </div>
                                 <div class="mt-3">
-                                    <label class="tx-11 fw-bolder mb-0 text-uppercase">Email:</label>
-                                    <p class="text-muted">me@nobleui.com</p>
+                                    <label class="tx-11 fw-bolder mb-0 text-uppercase">Address</label>
+                                    <p class="text-muted">{{ $userData->address }}</p>
                                 </div>
                                 <div class="mt-3">
-                                    <label class="tx-11 fw-bolder mb-0 text-uppercase">Website:</label>
-                                    <p class="text-muted">www.nobleui.com</p>
+                                    <label class="tx-11 fw-bolder mb-0 text-uppercase">Phone</label>
+                                    <p class="text-muted">{{ $userData->phone }}</p>
                                 </div>
                                 <div class="mt-3 d-flex social-links">
                                     <a href="javascript:;" class="btn btn-icon border btn-xs me-2">
@@ -70,36 +57,52 @@
                     </div>
                     <!-- left wrapper end -->
 
-                    <div class="col-md-6 grid-margin stretch-card">
-                        <div class="card">
+                    <div class="col-md-8 grid-margin stretch-card">
+                        <div class="card w-100">
                             <div class="card-body">
 
-                                <h6 class="card-title">Basic Form</h6>
+                                <h6 class="card-title"> Form</h6>
 
-                                <form class="forms-sample">
+                                <form class="forms-sample" method="post" action="{{ route('update.admin') }}" enctype="multipart/form-data">
+                                    @csrf
+                                    {{-- @method('put') --}}
+                                    <div class="mb-3">
+                                        <label for="exampleInputUsername1" class="form-label">Name</label>
+                                        <input type="text" class="form-control" id="exampleInputUsername1" name="name"
+                                            value="{{ $userData->name }}" autocomplete="off" placeholder="Name">
+                                    </div>
                                     <div class="mb-3">
                                         <label for="exampleInputUsername1" class="form-label">Username</label>
                                         <input type="text" class="form-control" id="exampleInputUsername1"
-                                            autocomplete="off" placeholder="Username">
+                                            autocomplete="off" placeholder="Username" value="{{ $userData->username }}">
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail1"
-                                            placeholder="Email">
+                                        <input type="email" class="form-control" id="exampleInputEmail1" name="email"
+                                            value="{{ $userData->email }}" placeholder="Email">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                                        <input type="password" class="form-control" id="exampleInputPassword1"
-                                            autocomplete="off" placeholder="Password">
+                                        <label for="address" class="form-label">Address</label>
+                                        <input type="text" class="form-control" id="address" autocomplete="off"
+                                            placeholder="Address" name="address" value="{{ $userData->address }}">
                                     </div>
-                                    <div class="form-check mb-3">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">
-                                            Remember me
-                                        </label>
+                                    <div class="mb-3">
+                                        <label for="phone" class="form-label">Phone No</label>
+                                        <input type="text" class="form-control" id="phone" autocomplete="off"
+                                            placeholder="Phone No" name="phone" value="{{ $userData->phone }}">
                                     </div>
-                                    <button type="submit" class="btn btn-primary me-2">Submit</button>
-                                    <button class="btn btn-secondary">Cancel</button>
+                                    <div class="mb-3">
+                                        <label for="Image" class="form-label">Image </label>
+                                        <input type="file" class="form-control" id="image" name="image"
+                                            autocomplete="off">
+                                    </div>
+                                    <div class="mb-2">
+
+                                        <img src="{{ !empty($userData->image) ? url('upload/admin_image/'.$userData->image) : url('upload/no_image.jpg') }}"
+                                            alt="" class="rounded-circle " width="60px" height="60px"
+                                            id="getimage">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary me-2">Save Changes</button>
                                 </form>
 
                             </div>
@@ -113,4 +116,16 @@
 
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            $("#image").change(function(e) {
+                e.preventDefault();
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $("#getimage").attr("src", e.target.result);
+                }
+                reader.readAsDataURL(e.target.files['0']);
+            });
+        });
+    </script>
 @endsection
