@@ -1,6 +1,8 @@
 @extends('admin.layouts.app')
 @section('main')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+ 
+
     <div class="main-wrapper">
 
         <!-- partial:partials/_sidebar.html -->
@@ -126,6 +128,17 @@
                 }
                 reader.readAsDataURL(e.target.files['0']);
             });
+            @if(session('success'))
+    <script>
+        Swal.fire({
+            title: 'Success!',
+            text: '{{ session('success') }}',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    </script>
+@endif
+
         });
     </script>
 @endsection

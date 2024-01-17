@@ -65,6 +65,8 @@ License: For each use you must have a valid license purchased only from above li
     <!-- Custom js for this page -->
     <script src="{{asset('backend/assets/js/dashboard-dark.js')}}"></script>
     <!-- End custom js for this page -->
+<!-- Include SweetAlert library from CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 

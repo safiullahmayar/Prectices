@@ -62,13 +62,14 @@ class AdminController extends Controller
         $userData->address = $request->address;
         if($request->Hasfile('image')){
             $image=$request->file('image');
-            @unlink(public_path('upload/admin_images/'.$userData->image)); 
+            $filePath = public_path('upload/admin_images/' . $userData->image);
+            @unlink($filePath);
             $imageName=date('YmDHi').$image->getclientOriginalName();
             $image->move(public_path('upload/admin_image'),$imageName);
             $userData->image=$imageName;
         }
         $userData->save();
-    return redirect()->back();
+    return redirect()->back()->with('success', 'Profile updated successfully!');
     }
 
     /**
