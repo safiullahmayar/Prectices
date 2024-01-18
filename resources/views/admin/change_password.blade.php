@@ -15,14 +15,15 @@
             @include('admin.layouts.header')
             <div class="page-content">
 
-                @if (Session::has('success'))
+                @if (Session::has('message'))
                     <div class="alert alert-success alert-dismissible" role="alert">
                         <button type="button" class="close" data-dismiss="alert">
                             <i class="fa fa-times">x</i>
                         </button>
-                        <strong>Success !</strong> {{ session('success') }}
+                        <strong>Success !</strong> {{ session('message') }}
                     </div>
                 @endif
+               
                 <div class="row profile-body">
                     <!-- left wrapper start -->
                     <div class="d-none d-md-block col-md-4 col-xl-4 left-wrapper">
@@ -30,7 +31,7 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-center justify-content-center mb-2">
 
-                                    <img src="{{ !empty($userData->image) ? url('upload/admin_images/' . $userData->image) : url('upload/no_image.jpg') }}"
+                                    <img src="{{ !empty($userData->image) ? url('upload/admin_image/' . $userData->image) : url('upload/no_image.jpg') }}"
                                         alt="" class="rounded-circle " width="50px" height="50px">
                                 </div>
                                 <p></p>
@@ -72,45 +73,29 @@
 
                                 <h6 class="card-title"> Form</h6>
 
-                                <form class="forms-sample" method="post" action="{{ route('update.admin') }}"
-                                    enctype="multipart/form-data">
+                                <form class="forms-sample" method="post" action="{{ route('changePasswordSave') }}">
                                     @csrf
                                     {{-- @method('put') --}}
                                     <div class="mb-3">
-                                        <label for="exampleInputUsername1" class="form-label">Name</label>
-                                        <input type="text" class="form-control" id="exampleInputUsername1" name="name"
-                                            value="{{ $userData->name }}" autocomplete="off" placeholder="Name">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="exampleInputUsername1" class="form-label">Username</label>
-                                        <input type="text" class="form-control" id="exampleInputUsername1"
-                                            autocomplete="off" placeholder="Username" value="{{ $userData->username }}">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail1" name="email"
-                                            value="{{ $userData->email }}" placeholder="Email">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="address" class="form-label">Address</label>
-                                        <input type="text" class="form-control" id="address" autocomplete="off"
-                                            placeholder="Address" name="address" value="{{ $userData->address }}">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="phone" class="form-label">Phone No</label>
-                                        <input type="text" class="form-control" id="phone" autocomplete="off"
-                                            placeholder="Phone No" name="phone" value="{{ $userData->phone }}">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="Image" class="form-label">Image </label>
-                                        <input type="file" class="form-control" id="image" name="image"
-                                            autocomplete="off">
-                                    </div>
-                                    <div class="mb-2">
+                                        <label for="" class="form-label">Old Password</label>
+                                        <input type="password" class="form-control" id=""
+                                            name="current_password" value="{{ old('current_password') }}" autocomplete="off"
+                                            placeholder="old password">
 
-                                        <img src="{{ !empty($userData->image) ? url('upload/admin_images/' . $userData->image) : url('upload/no_image.jpg') }}"
-                                            alt="" class="rounded-circle " width="60px" height="60px"
-                                            id="getimage">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">New Password</label>
+                                        <input type="password" class="form-control" id=""
+                                            autocomplete="off" placeholder="New Password" value="{{ old('password') }}"
+                                            name="password">
+                                    </div>
+                                    @error('new_password')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Confirm Password</label>
+                                        <input type="password" class="form-control" id=""
+                                            name="password_confirmation" value="" placeholder="Confirm Password">
                                     </div>
                                     <button type="submit" class="btn btn-primary me-2">Save Changes</button>
                                 </form>
@@ -126,7 +111,7 @@
 
         </div>
     </div>
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             $("#image").change(function(e) {
                 e.preventDefault();
@@ -137,5 +122,5 @@
                 reader.readAsDataURL(e.target.files['0']);
             });
         });
-    </script>
+    </script> --}}
 @endsection

@@ -33,8 +33,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/profile', [AdminController::class, 'admin_profile'])->name('admin.profile');
     Route::post('/admin/update', [AdminController::class, 'update'])->name('update.admin');
-
     Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');
+    Route::get('/admin/change_password', [AdminController::class, 'change_password'])->name('change_password');
+    Route::post('/admin/changePasswordSave', [AdminController::class, 'changePasswordSave'])->name('change_password');
+
+
 });
 Route::middleware(['auth', 'role:agent'])->group(function () {
     Route::get('/agent/dashboard', [AgentController::class, 'index'])->name('agent.dashboard');

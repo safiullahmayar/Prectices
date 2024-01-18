@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -60,16 +61,16 @@ class AdminController extends Controller
         $userData->email = $request->email;
         $userData->phone = $request->phone;
         $userData->address = $request->address;
-        if($request->Hasfile('image')){
-            $image=$request->file('image');
+        if ($request->Hasfile('image')) {
+            $image = $request->file('image');
             $filePath = public_path('upload/admin_images/' . $userData->image);
             @unlink($filePath);
-            $imageName=date('YmDHi').$image->getclientOriginalName();
-            $image->move(public_path('upload/admin_image'),$imageName);
-            $userData->image=$imageName;
+            $imageName = date('YmDHi') . $image->getclientOriginalName();
+            $image->move(public_path('upload/admin_images'), $imageName);
+            $userData->image = $imageName;
         }
         $userData->save();
-    return redirect()->back()->with('success', 'Profile updated successfully!');
+        return redirect()->back()->with('success', 'Profile updated successfully!');
     }
 
     /**
@@ -92,8 +93,38 @@ class AdminController extends Controller
     }
     public function admin_profile()
     {
+
+
         $id = Auth::user()->id;
         $userData = User::find($id);
         return view('admin.admin_profile', compact('userData'));
     }
+    public function change_password()
+    {
+        $id = Auth::user()->id;
+        $userData = User::find($id);
+        return view('admin.change_password', compact('userData'));
+    }
+    public function changePasswordsave(Request $request)
+    {
+        $request->validate([
+            'current_password' => ['required'],
+            'password' => ['required', 'confirmed']
+        ]);
+
+        $currentPasswordStatus = Hash::check($request->current_password, auth()->user()->password);
+        if($currentPasswordStatus){
+
+            User::findOrFail(Auth::user()->id)->update([
+                'password' => Hash::make($request->password),
+            ]);
+
+            return redirect()->back()->with('message','Password Updated Successfully');
+
+        }else{
+
+            return redirect()->back()->with('message','Current Password does not match with Old Password');
+        }
+    }
 }
+
