@@ -13,10 +13,17 @@
             <!-- partial:partials/_navbar.html -->
             @include('admin.layouts.header')
             <div class="page-content">
-                {{-- {{ $dataTable->table() }} --}}
+                @if (Session::has('message'))
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert">
+                        <i class="fa fa-times">x</i>
+                    </button>
+                    <strong>Success !</strong> {{ session('message') }}
+                </div>
+            @endif
                 <nav class="page-breadcrumb">
                     <ol class="breadcrumb">
-                        <a href="{{  }}" class="btn btn-primary btn-lg ">Add Property Type</a>
+                        <a href="{{ route('property.create') }}" class="btn btn-primary btn-lg ">Add Property Type</a>
                     </ol>
                 </nav>
 
@@ -25,7 +32,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h6 class="card-title">All Type Of properties</h6>
-                              
+
                                 <div class="table-responsive" id="myTable">
                                     <table id="dataTableExample" class="table">
                                         <thead>

@@ -44,6 +44,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::controller(PropertyController::class)->group(function () {
         Route::get('/property/alltype', 'index')->name('property.alltype');
+        Route::post('/property/add', 'store')->name('property.store');
+        Route::get('/property/create', 'create')->name('property.create');
+        Route::get('/property/edit', 'edit')->name('property.edit');
+
+
+
     });
 });
 //  properties routes end
