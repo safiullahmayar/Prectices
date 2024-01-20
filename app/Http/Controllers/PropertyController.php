@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\property;
 use App\DataTables\PropertiesDataTable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PropertyController extends Controller
 {
@@ -35,4 +36,10 @@ class PropertyController extends Controller
         $property->save();
         return redirect()->route('property.alltype')->with('message', 'property added successfully');
     }
+
+public function edit(string $id)
+{
+    $property=property::where('id',$id)->first();
+    return view('property.edit',['property'=>$property]);
+}
 }

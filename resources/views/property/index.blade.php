@@ -14,13 +14,13 @@
             @include('admin.layouts.header')
             <div class="page-content">
                 @if (Session::has('message'))
-                <div class="alert alert-success alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert">
-                        <i class="fa fa-times">x</i>
-                    </button>
-                    <strong>Success !</strong> {{ session('message') }}
-                </div>
-            @endif
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert">
+                            <i class="fa fa-times">x</i>
+                        </button>
+                        <strong>Success !</strong> {{ session('message') }}
+                    </div>
+                @endif
                 <nav class="page-breadcrumb">
                     <ol class="breadcrumb">
                         <a href="{{ route('property.create') }}" class="btn btn-primary btn-lg ">Add Property Type</a>
@@ -54,7 +54,7 @@
                                                     <td>{{ $property->description }}</td>
                                                     <td>{{ $property->type_ican }}</td>
 
-                                                    <td> <a href="{{ $property->id }}"
+                                                    <td> <a href="{{ url('property.edit/'.$property->id) }}"
                                                             class="btn  btn-outline-success btn-sm text-center">Edit</a>
                                                         <a href=""
                                                             class="btn  btn-outline-danger btn-sm text-center">Delete</a>
