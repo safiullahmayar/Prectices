@@ -45,10 +45,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::controller(PropertyController::class)->group(function () {
         Route::get('/amenites/allamenites', 'allamenites')->name('amenites.allamenites');
         Route::post('/amenites/add_amenites', 'add_amenites')->name('amenites.store');
-        Route::get('/amenites/create_amenites', 'create_amenites')->name('amenites.create_amenites');
-        Route::get('/amenites/edit_amenites/{id}', 'edit_amenites')->name('amenites.edit_add_amenites');
-        Route::post('/amenites/update_amenites/{id}', 'update_amenites')->name('amenites.update_amenites');
-        Route::get('/amenites/delete_menites/{id}', 'amenites_destroy')->name('amenites.delete_amenites');
+        Route::get('/amenites/create_amenites', 'create_amenites')->name('create_amenites');
+        Route::get('/amenites/edit_amenites/{id}', 'edit_amenites')->name('edit_amenites');
+        Route::post('/amenites/update_amenites/{id}', 'update_amenites')->name('update_amenites');
+        Route::get('/amenites/delete_menites/{id}', 'amenites_destroy')->name('delete_amenites');
     });
 });
 //  properties routes

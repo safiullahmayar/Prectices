@@ -22,54 +22,57 @@
                     </div>
                 @endif --}}
                 @if (session('message'))
-                <script>
-                    Swal.fire("{{ session('message') }}");
-                </script>
-            @endif
+                    <script>
+                        Swal.fire("{{ session('message') }}");
+                    </script>
+                @endif
                 <nav class="page-breadcrumb">
                     <ol class="breadcrumb">
-                        <a href="{{ route('property.create') }}" class="btn btn-primary btn-lg ">Add Property Type</a>
+                        <a href="{{ route('create_amenites') }}" class="btn btn-primary btn-lg ">Add amenite </a>
                     </ol>
                 </nav>
 
                 <div class="row">
-                    <div class="col-md-12 grid-margin stretch-card">
+                    <div class="col-md-5 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <h6 class="card-title">All Type Of properties</h6>
+                                <h6 class="card-title">All Type Of amenite</h6>
 
                                 <div class="table-responsive" id="myTable">
-                                    <table id="dataTableExample" class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Name</th>
-                                                <th>Description</th>
-                                                <th>Ican type</th>
-                                                <th class="">Action</th>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            @foreach ($properties as $property)
+                                    @if ($amenties)
+                                        <table id="dataTableExample" class="table">
+                                            <thead>
                                                 <tr>
-                                                    <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $property->type_name }}</td>
-                                                    <td>{{ $property->description }}</td>
-                                                    <td>{{ $property->type_ican }}</td>
+                                                    <th>#</th>
+                                                    <th>Name</th>
+                                                    <th>Action</th>
 
-                                                    <td> <a href="{{ url('property/edit/' . $property->id) }}"
-                                                            class="btn  btn-outline-success btn-sm text-center">Edit</a>
-                                                        <a href="#" id="delete"
-                                                            onclick="deleteProperty('{{ $property->id }}')"
-                                                            class="btn  btn-outline-danger btn-sm text-center">Delete</a>
-
-                                                    </td>
                                                 </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+
+                                                @foreach ($amenties as $amenite)
+                                                    <tr>
+                                                        <td>{{ $loop->iteration }}</td>
+                                                        <td>{{ $amenite->amenites_name }}</td>
+                                                
+
+                                                        <td> <a href="{{ url('edit_amenites/' . $amenite->id) }}"
+                                                                class="btn  btn-outline-success btn-sm text-center">Edit</a>
+                                                            <a href="#" id="delete"
+                                                                onclick="deleteamenite('{{ $amenite->id }}')"
+                                                                class="btn  btn-outline-danger btn-sm text-center">Delete</a>
+
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    @else
+                                        <th class="text-light">
+                                            Not Found
+                                        </th>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -86,7 +89,6 @@
 @endsection
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
-   
     // $(function() {
     // $(document).on('click', '#delete', function(e) {
     // e.preventDefault();
@@ -116,8 +118,8 @@
     // });
 
     // });
-    function deleteProperty(id) {
-        
+    function deleteamenite(id) {
+
         Swal.fire({
             title: 'Are you sure?',
             text: "Delete This Data?",
@@ -128,7 +130,7 @@
             confirmButtonText: 'Yes, delete it!'
         }).then((message) => {
             if (message.isConfirmed) {
-                window.location.href = "/property/delete/" + id;
+                window.location.href = "/delete_amenites/" + id;
                 Swal.fire(
                     'Deleted!',
                     'Your file has been deleted.',

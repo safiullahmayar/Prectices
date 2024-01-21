@@ -14,7 +14,7 @@
             <!-- partial:partials/_navbar.html -->
             @include('admin.layouts.header')
             <div class="page-content">
-                <form class="forms-sample" method="post" action="{{ route('property.store') }}">
+                <form class="forms-sample" method="post" action="{{ route('amenites.store') }}">
                     <div class="row profile-body  ">
                         <div class="col-md-8 grid-margin stretch-card">
                             <div class="card w-75 h-100">
@@ -62,6 +62,4 @@
         </div>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     </div>
-
-   
 @endsection

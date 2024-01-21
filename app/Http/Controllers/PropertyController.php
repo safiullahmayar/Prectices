@@ -73,16 +73,16 @@ class PropertyController extends Controller
     // end of perproperty function
     public function allamenites()
     {
-        $properties = Property::get();
+        $amenties = amenties::get();
 
 
         // dd($propertiesDataTable);
-        return view('amenties.index', ['properties' => $properties]);
+        return view('amenites.index', ['amenties' => $amenties]);
         // return $dataTable->render('amenties.index');
     }
     public function create_amenites()
     {
-        return view('amenties.create');
+        return view('amenites.create');
     }
     public function add_amenites(Request $request)
     {
@@ -102,7 +102,7 @@ class PropertyController extends Controller
     public function edit_amenites($id)
     {
         $amenties = amenties::where('id', $id)->first();
-        return view('amenties.edit', ['amenties' => $amenties]);
+        return view('amenites.edit', ['amenties' => $amenties]);
     }
     public function update_amenites(Request $requsest)
     {
