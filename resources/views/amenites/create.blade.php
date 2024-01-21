@@ -24,7 +24,7 @@
 
                                     @csrf
                                     {{-- @method('put') --}}
-                                    {{ view('property.form_field') }}
+                                    {{ view('amenites.form_field') }}
 
 
                                 </div>

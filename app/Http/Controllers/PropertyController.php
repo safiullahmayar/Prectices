@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\property;
 use App\DataTables\PropertiesDataTable;
+use App\Models\Amenties;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,21 +23,22 @@ class PropertyController extends Controller
     {
         return view('property.create');
     }
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
         $request->validate([
             'type_name' => 'required',
             'description' => 'required',
             'property_ican' => 'required',
         ]);
-        $property = property::find($id);
-        $item = [
-            'type_name' => $request->type_name,
-            'description' => $request->description,
-            'type_ican' => $request->property_ican,
-        ];
-        $property->save($item);
-        return redirect()->route('property.alltype')->with('message', 'property added successfully');
+        property::create(
+            [
+                'type_name' => $request->type_name,
+                'description' => $request->description,
+                'type_ican' => $request->property_ican,
+            ]
+        );
+
+        return redirect()->route('property.alltype')->with('message', 'new property type successfully added');
     }
 
     public function edit($id)
@@ -46,7 +48,6 @@ class PropertyController extends Controller
     }
     public function update(Request $requsest)
     {
-        
         $validate = $requsest->validate([
             'type_name' => 'required',
             'description' => 'required',
@@ -68,5 +69,61 @@ class PropertyController extends Controller
         $property = property::where('id', $id)->first();
         $property->delete();
         return redirect()->route('property.alltype')->with('message', 'property deleted successfully');
+    }
+    // end of perproperty function
+    public function allamenites()
+    {
+        $properties = Property::get();
+
+
+        // dd($propertiesDataTable);
+        return view('amenties.index', ['properties' => $properties]);
+        // return $dataTable->render('amenties.index');
+    }
+    public function create_amenites()
+    {
+        return view('amenties.create');
+    }
+    public function add_amenites(Request $request)
+    {
+        $request->validate([
+            'amenites_name' => 'required',
+        ]);
+        amenties::create(
+            [
+                'amenites_name' => $request->amenites_name,
+
+            ]
+        );
+
+        return redirect()->route('amenites.allamenites')->with('message', 'new amenties type successfully added');
+    }
+
+    public function edit_amenites($id)
+    {
+        $amenties = amenties::where('id', $id)->first();
+        return view('amenties.edit', ['amenties' => $amenties]);
+    }
+    public function update_amenites(Request $requsest)
+    {
+        $validate = $requsest->validate([
+            'amenites_name' => 'required',
+
+        ]);
+        if ($validate) {
+            $amenties = amenties::where('id', $requsest->id)->first();
+            $amenties->amenites_name = $requsest->amenites_name;
+
+            $amenties->save();
+            return redirect()->route('amenites.allamenites')->with('message', 'amenties updated successfully');
+        } else {
+            return redirect()->back()->with('message', 'amenties not updated');
+        }
+    }
+    public function amenites_destroy($id)
+    {
+        $amenties = Amenties::where('id', $id)->first();
+        $amenties->delete();
+        return redirect()->route('amenites.allamenites')->with('message', 'amenties deleted successfully');
     }
 }

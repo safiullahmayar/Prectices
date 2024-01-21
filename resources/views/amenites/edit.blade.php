@@ -14,17 +14,24 @@
             <!-- partial:partials/_navbar.html -->
             @include('admin.layouts.header')
             <div class="page-content">
-                <form class="forms-sample" method="post" action="{{ route('property.store') }}">
+                <form class="forms-sample" method="post" action="{{ route('property.update',['id' => $property]) }}">
                     <div class="row profile-body  ">
                         <div class="col-md-8 grid-margin stretch-card">
                             <div class="card w-75 h-100">
                                 <div class="card-body">
-
-                                    <h6 class="card-title"> Form</h6>
+                                    @if (Session::has('message'))
+                                    <div class="alert alert-success alert-dismissible" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert">
+                                            <i class="fa fa-times">x</i>
+                                        </button>
+                                        <strong>Success !</strong> {{ session('message') }}
+                                    </div>
+                                @endif
+                                    <h6 class="card-title text-center">Update property</h6>
 
                                     @csrf
                                     {{-- @method('put') --}}
-                                    {{ view('property.form_field') }}
+                                    {{ view('property.form_field',['property'=>$property]) }}
 
 
                                 </div>
@@ -39,7 +46,7 @@
                                             <button type="submit"
                                                 class="btn btn-outline-success waves-effect waves-float waves-light buttonToBlockUI me-1">
                                                 <i data-feather='save'></i>
-                                                {{ __('property.type.save') }}
+                                                {{ __('property.type.Update') }} 
                                             </button>
                                             <a href="{{ route('property.alltype') }}"
                                                 class="btn btn-outline-danger waves-effect waves-float waves-light">
@@ -60,8 +67,5 @@
 
 
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     </div>
-
-   
 @endsection
