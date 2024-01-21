@@ -54,9 +54,9 @@
                                                     <td>{{ $property->description }}</td>
                                                     <td>{{ $property->type_ican }}</td>
 
-                                                    <td> <a href="{{ url('property.edit/'.$property->id) }}"
+                                                    <td> <a href="{{ url('property/edit/' . $property->id) }}"
                                                             class="btn  btn-outline-success btn-sm text-center">Edit</a>
-                                                        <a href=""
+                                                        <a href="" id="delete"
                                                             class="btn  btn-outline-danger btn-sm text-center">Delete</a>
 
                                                     </td>
@@ -77,7 +77,37 @@
 
         </div>
     </div>
-    <script>
-        let table = new DataTable('#myTable');
-    </script>
 @endsection
+<script src = "https://cdn.jsdelivr.net/npm/sweetalert2@10" >
+</script>
+<script>
+$(function() {
+$(document).on('click', '#delete', function(e) {
+e.preventDefault();
+var link = $(this).attr("href");
+
+
+Swal.fire({
+title: 'Are you sure?',
+text: "Delete This Data?",
+icon: 'warning',
+showCancelButton: true,
+confirmButtonColor: '#3085d6',
+cancelButtonColor: '#d33',
+confirmButtonText: 'Yes, delete it!'
+}).then((result) => {
+if (result.isConfirmed) {
+window.location.href = link
+Swal.fire(
+'Deleted!',
+'Your file has been deleted.',
+'success'
+)
+}
+})
+
+
+});
+
+});
+</script>

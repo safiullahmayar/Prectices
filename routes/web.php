@@ -47,6 +47,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::post('/property/add', 'store')->name('property.store');
         Route::get('/property/create', 'create')->name('property.create');
         Route::get('/property/edit/{id}', 'edit')->name('property.edit');
+        Route::post('/property/update/{id}', 'update')->name('property.update');
+        Route::get('/property/delete/{id}', 'destroy')->name('property.delete');
+
     });
 });
 //  properties routes end

@@ -41,7 +41,7 @@
                                                 <i data-feather='save'></i>
                                                 {{ __('property.type.save') }} Site
                                             </button>
-                                            <a href=""
+                                            <a href="{{ route('property.alltype') }}"
                                                 class="btn btn-outline-danger waves-effect waves-float waves-light">
                                                 <i data-feather='x'></i>
                                                 {{ __('property.type.cancel') }}
