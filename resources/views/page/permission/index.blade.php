@@ -45,22 +45,26 @@
                                                 <tr>
                                                     <th>#</th>
                                                     <th>Name</th>
+                                                    <th>Group Name</th>
+
                                                     <th>Action</th>
 
                                                 </tr>
                                             </thead>
                                             <tbody>
 
-                                                @foreach ($amenties as $amenite)
+                                                @foreach ($permission as $item)
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
-                                                        <td>{{ $amenite->amenites_name }}</td>
+                                                        <td>{{ $item->name }}</td>
+                                                        <td>{{ $item->group_name }}</td>
 
 
-                                                        <td> <a href="{{ route('edit_amenites', ['id' => $amenite->id]) }}"
+
+                                                        <td> <a href="{{ route('edit_amenites', ['id' => $item->id]) }}"
                                                                 class="btn  btn-outline-success btn-sm text-center">Edit</a>
                                                             <a href="#" id="delete"
-                                                                onclick="deleteamenite('{{ $amenite->id }}')"
+                                                                onclick="deleteamenite('{{ $item->id }}')"
                                                                 class="btn  btn-outline-danger btn-sm text-center">Delete</a>
 
                                                         </td>
@@ -87,57 +91,3 @@
         </div>
     </div>
 @endsection
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<script>
-    // $(function() {
-    // $(document).on('click', '#delete', function(e) {
-    // e.preventDefault();
-    // var link = $(this).attr("href");
-
-
-    // Swal.fire({
-    // title: 'Are you sure?',
-    // text: "Delete This Data?",
-    // icon: 'warning',
-    // showCancelButton: true,
-    // confirmButtonColor: '#3085d6',
-    // cancelButtonColor: '#d33',
-    // confirmButtonText: 'Yes, delete it!'
-    // }).then((result) => {
-    // if (result.isConfirmed) {
-    // window.location.href = link
-    // Swal.fire(
-    // 'Deleted!',
-    // 'Your file has been deleted.',
-    // 'success'
-    // )
-    // }
-    // })
-
-
-    // });
-
-    // });
-    function deleteamenite(id) {
-
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "Delete This Data?",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((message) => {
-            if (message.isConfirmed) {
-                window.location.href = "{{ url('delete_amenites') }}/" + id;
-
-                Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
-                    'success'
-                )
-            }
-        })
-    }
-</script>

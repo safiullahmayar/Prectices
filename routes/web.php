@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AgentController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PropertyController;
 use Illuminate\Support\Facades\Route;
+use Spatie\Permission\Contracts\Permission;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,6 +58,16 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::controller(PropertyController::class)->group(function () {
         Route::get('/property/alltype', 'index')->name('property.alltype');
+        Route::post('/property/add', 'store')->name('property.store');
+        Route::get('/property/create', 'create')->name('property.create');
+        Route::get('/property/edit/{id}', 'edit')->name('property.edit');
+        Route::post('/property/update/{id}', 'update')->name('property.update');
+        Route::get('/property/delete/{id}', 'destroy')->name('property.delete');
+    });
+
+    // this is permission 
+    Route::controller(PermissionController::class)->group(function () {
+        Route::get('/permission/all', 'index')->name('permission.index');
         Route::post('/property/add', 'store')->name('property.store');
         Route::get('/property/create', 'create')->name('property.create');
         Route::get('/property/edit/{id}', 'edit')->name('property.edit');
