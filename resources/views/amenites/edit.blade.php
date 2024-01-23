@@ -14,7 +14,7 @@
             <!-- partial:partials/_navbar.html -->
             @include('admin.layouts.header')
             <div class="page-content">
-                <form class="forms-sample" method="post" action="{{ route('property.update',['id' => $property]) }}">
+                <form class="forms-sample" method="post" action="{{ route('update_amenites',['id' => $amenties]) }}">
                     <div class="row profile-body  ">
                         <div class="col-md-8 grid-margin stretch-card">
                             <div class="card w-75 h-100">
@@ -31,7 +31,7 @@
 
                                     @csrf
                                     {{-- @method('put') --}}
-                                    {{ view('property.form_field',['property'=>$property]) }}
+                                    {{ view('amenites.form_field',['amenties'=>$amenties]) }}
 
 
                                 </div>

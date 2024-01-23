@@ -32,11 +32,11 @@
 <div class="mb-3">
     <label for="" class="form-label">Property ican </label>
     @if (isset($property))
-        <input type="text" class="form-control" id="" name="property_ican" 
-            placeholder="property Ican" value="{{ $property->type_ican }}">
+        <input type="text" class="form-control" id="" name="property_ican" placeholder="property Ican"
+            value="{{ $property->type_ican }}">
     @else
-        <input type="text" class="form-control" id="" name="property_ican" 
-            placeholder="property Ican" value="{{ old('property_ican') }}">
+        <input type="text" class="form-control" id="" name="property_ican" placeholder="property Ican"
+            value="{{ old('property_ican') }}">
         @error('property_ican')
             <span class="text-danger">{{ $message }}</span>
         @enderror

@@ -33,7 +33,7 @@
                 </nav>
 
                 <div class="row">
-                    <div class="col-md-5 grid-margin stretch-card">
+                    <div class="col-md-5 grid-margin stretch-card offset-3">
                         <div class="card">
                             <div class="card-body">
                                 <h6 class="card-title">All Type Of amenite</h6>
@@ -55,9 +55,9 @@
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
                                                         <td>{{ $amenite->amenites_name }}</td>
-                                                
 
-                                                        <td> <a href="{{ url('edit_amenites/' . $amenite->id) }}"
+
+                                                        <td> <a href="{{ route('edit_amenites',['id'=>$amenite->id]) }}"
                                                                 class="btn  btn-outline-success btn-sm text-center">Edit</a>
                                                             <a href="#" id="delete"
                                                                 onclick="deleteamenite('{{ $amenite->id }}')"
@@ -130,7 +130,7 @@
             confirmButtonText: 'Yes, delete it!'
         }).then((message) => {
             if (message.isConfirmed) {
-                window.location.href = "/delete_amenites/" + id;
+                window.location.href = "delete_amenites/"+id;
                 Swal.fire(
                     'Deleted!',
                     'Your file has been deleted.',
