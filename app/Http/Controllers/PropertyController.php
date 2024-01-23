@@ -101,7 +101,7 @@ class PropertyController extends Controller
 
     public function edit_amenites($id)
     {
-// dd($id);
+        // dd($id);
         $amenties = amenties::where('id', $id)->first();
         return view('amenites.edit', ['amenties' => $amenties]);
     }

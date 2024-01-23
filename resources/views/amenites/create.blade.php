@@ -1,8 +1,9 @@
 @extends('admin.layouts.app')
 @section('main')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
-
+<script src="path/to/jquery.validate.min.js"></script>
     <div class="main-wrapper">
 
         <!-- partial:partials/_sidebar.html -->
@@ -14,7 +15,7 @@
             <!-- partial:partials/_navbar.html -->
             @include('admin.layouts.header')
             <div class="page-content">
-                <form class="forms-sample" method="post" action="{{ route('amenites.store') }}">
+                <form class="forms-sample" id="MyForm" method="post" action="{{ route('amenites.store') }}">
                     <div class="row profile-body  ">
                         <div class="col-md-8 grid-margin stretch-card">
                             <div class="card w-75 h-100">
@@ -52,14 +53,81 @@
                             </div>
                         </div>
                     </div>
-
-
                 </form>
             </div>
             @include('admin.layouts.footer')
 
 
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    </div>
-@endsection
+        <!-- jQuery -->
+        {{-- <script> --}}
+            <script>
+                $(document).ready(function() {
+                    $('#myForm').validate({
+                        messages: {
+                            username: "Please enter a valid username."
+                        }
+                    });
+                });
+        {{-- </script> --}}
+        </script>
+        {{-- <script type="text/javascript">
+            $(document).ready(function() {
+                $('#formid').validate({
+                    rules: {
+                        amenites_name: {
+                            required: true,
+                        },
+
+                    },
+                    messages: {
+                        amenites_name: {
+                            required: 'Please Enter FieldName',
+                        },
+
+
+                    },
+                    errorElement: 'span',
+                    errorPlacement: function(error, element) {
+                        error.addClass('invalid-feedback');
+                        element.closest('.form-group').append(error);
+                    },
+                    highlight: function(element, errorClass, validClass) {
+                        $(element).addClass('is-invalid');
+                    },
+                    unhighlight: function(element, errorClass, validClass) {
+                        $(element).removeClass('is-invalid');
+                    },
+                });
+            });
+        </script> --}}
+        {{-- // $(document).ready(function() {
+        // $('#formid').validate({
+        // rules: {
+        // amenites_name: {
+        // required: true,
+        // minlength: 3,
+        // maxlength: 255,
+        // }
+        // },
+        // messages: {
+        // amenites_name: {
+        // required: "Please enter the amenity name",
+        // minlength: "The amenity name must be at least 3 characters long",
+        // maxlength: "The amenity name must not exceed 255 characters"
+        // }
+        // },
+        // errorElement: 'span',
+        // errorPlacement: function(error, element) {
+        // error.addClass('invalid');
+        // element.closest('.form-group').append(error);
+        // },
+        // highlight: function(element, errorClass, validClass) {
+        // $(element).addClass('is-invalid').removeClass('is-valid');
+        // },
+        // unhighlight: function(element, errorClass, validClass) {
+        // $(element).removeClass('is-invalid').addClass('is-valid');
+        // },
+        // });
+        // }); --}}
+    @endsection

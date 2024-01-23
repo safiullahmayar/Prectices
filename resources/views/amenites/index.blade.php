@@ -59,7 +59,7 @@
 
                                                         <td> <a href="{{ route('edit_amenites',['id'=>$amenite->id]) }}"
                                                                 class="btn  btn-outline-success btn-sm text-center">Edit</a>
-                                                            <a href="#" id="delete"
+                                                            <a href="{{ route('delete_amenites',['id'=>$amenite->id]) }}" id="delete"
                                                                 onclick="deleteamenite('{{ $amenite->id }}')"
                                                                 class="btn  btn-outline-danger btn-sm text-center">Delete</a>
 

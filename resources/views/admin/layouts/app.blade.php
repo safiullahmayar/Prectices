@@ -47,7 +47,9 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Custom js for this page -->
     <!-- core:js -->
+
     <script src="{{ asset('backend/assets/vendors/core/core.js') }}"></script>
+
     <!-- endinject -->
 
     <!-- Plugin js for this page -->
@@ -65,10 +67,8 @@
     <!-- End custom js for this page -->
     <!-- Include SweetAlert library from CDN -->
     < <script src="{{ asset('backend/assets/vendors/apexcharts/apexcharts.min.js') }}"></script>
-    <script src="{{ asset('backend/assets/vendors/datatables.net-bs5/dataTables.bootstrap5.js') }}">
-        < /> <
-        script src = "http//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js" >
-    </script>
+    <script src="{{ asset('backend/assets/vendors/datatables.net-bs5/dataTables.bootstrap5.js') }}"></script>
+    <script src="http//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <!-- End custom js for this page -->
 </body>
 
