@@ -5,6 +5,7 @@ use App\Http\Controllers\AgentController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Contracts\Permission;
 
@@ -73,12 +74,19 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/permission/edit/{id}', 'edit')->name('permission.edit');
         Route::post('/permission/update/{id}', 'update')->name('permission.update');
         Route::get('/permission/delete/{id}', 'destroy')->name('permission.delete');
+        // files routes
         Route::get('/permission/import_excel', 'import_excel')->name('permission.import_excel');
         Route::post('/permission/import', 'import')->name('permission.import');
-
         Route::get('/permission/export', 'export_permission')->name('export_permission');
-
-
+    });
+    // Role routes
+    Route::controller(RoleController::class)->group(function () {
+        Route::get('/role/all', 'index')->name('role.index');
+        Route::get('/role/create', 'create')->name('create_role');
+        Route::post('/role/add', 'store')->name('role.store');
+        Route::get('/role/edit/{id}', 'edit')->name('role.edit');
+        Route::post('/role/update/{id}', 'update')->name('role.update');
+        Route::get('/role/delete/{id}', 'destroy')->name('role.delete');
     });
 });
 //  properties routes end
