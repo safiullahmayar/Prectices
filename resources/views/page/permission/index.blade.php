@@ -29,7 +29,9 @@
                 <nav class="page-breadcrumb">
                     <ol class="breadcrumb">
                         <a href="{{ route('create_permission') }}" class="btn btn-primary btn-lg ">Add New Permission </a>
-                        <a href="{{ route('permission.import_excel') }}" class="btn btn-success mx-3">Import File</a>
+                        <a href="{{ route('permission.import_excel') }}" class="btn btn-success mx-2">Import File</a>
+                        <a href="{{ route('export_permission') }}" class="btn btn-danger btn-lg "> Download</a>
+
 
                     </ol>
                 </nav>

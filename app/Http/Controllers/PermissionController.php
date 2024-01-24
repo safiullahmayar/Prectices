@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\PermissionExport;
+use App\Imports\permissionImport;
 use Faker\Provider\ar_EG\Person;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -107,5 +108,11 @@ class PermissionController extends Controller
     public function export_permission()
     {
         return Excel::download(new PermissionExport,'permission.xlsx');
+    }
+    public function import() 
+    {
+        Excel::import(new permissionImport, 'permission.xlsx');
+        
+        return redirect()->route('permission.index')->with('success', 'All good!');
     }
 }

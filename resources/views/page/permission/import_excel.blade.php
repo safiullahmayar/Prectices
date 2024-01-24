@@ -28,7 +28,6 @@
                 @endif
                 <nav class="page-breadcrumb">
                     <ol class="breadcrumb">
-                        <a href="{{ route('export_permission') }}" class="btn btn-danger btn-lg "> Download</a>
                     </ol>
                 </nav>
 
@@ -39,7 +38,8 @@
                                 <h6 class="card-title">Import Xls</h6>
 
                                 <div class="table-responsive" id="myTable">
-                                    <form action="">
+                                    <form action="{{ route('permission.import') }}" method="post">
+                                        @csrf
                                         <div class="mb-3">
                                             <label for="" class="form-label"> Import Xls file<span
                                                     class="text-danger">*</span></label>
