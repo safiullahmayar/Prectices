@@ -14,7 +14,7 @@
             <!-- partial:partials/_navbar.html -->
             @include('admin.layouts.header')
             <div class="page-content">
-                <form class="forms-sample" method="post" action="{{ route('permission.store') }}">
+                <form class="forms-sample" method="post" action="{{ route('role.store') }}">
                     <div class="row profile-body  ">
                         <div class="col-md-8 grid-margin stretch-card">
                             <div class="card w-75 h-100">
@@ -24,7 +24,7 @@
 
                                     @csrf
                                     {{-- @method('put') --}}
-                                    {{ view('page.permission.form_fields') }}
+                                    {{ view('page.role.form_fields') }}
 
 
                                 </div>
@@ -39,12 +39,12 @@
                                             <button type="submit"
                                                 class="btn btn-outline-success waves-effect waves-float waves-light buttonToBlockUI me-1">
                                                 <i data-feather='save'></i>
-                                                {{ __('permission.save') }}
+                                                {{ __('role.save') }}
                                             </button>
-                                            <a href="{{ route('permission.index') }}"
+                                            <a href="{{ route('role.index') }}"
                                                 class="btn btn-outline-danger waves-effect waves-float waves-light">
                                                 <i data-feather='x'></i>
-                                                {{ __('Permission.cancel') }}
+                                                {{ __('role.cancel') }}
                                             </a>
                                         </div>
                                     </div>

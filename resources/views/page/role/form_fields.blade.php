@@ -2,7 +2,7 @@
     <label for="" class="form-label"> Role Name<span class="text-danger">*</span></label>
 
     <input type="text" class="form-control" id="" name="name"
-        {{-- @if (isset($permission)) value="{{ $permission ? $permission->name : '' }}" @endif autocomplete="off" --}}
+        @if (isset($role)) value="{{ $role ? $role->name : '' }}" @endif autocomplete="off"
         placeholder="type name">
 
     @error('name')

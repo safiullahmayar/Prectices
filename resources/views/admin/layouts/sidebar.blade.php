@@ -65,14 +65,14 @@
 
 
             {{-- permission start --}}
-            <li class="nav-item nav-category text-capitalize">Permission & Roles</li>
+            <li class="nav-item nav-category text-capitalize">Permission</li>
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#emails" role="button" aria-expanded="false"
-                aria-controls="emails">
-                <i class="link-icon" data-feather="mail"></i>
-                <span class="link-title">All Permission</span>
-                <i class="link-arrow" data-feather="chevron-down"></i>
-            </a>
+                    aria-controls="emails">
+                    <i class="link-icon" data-feather="mail"></i>
+                    <span class="link-title">All Permission</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
                 <div class="collapse" id="emails">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
@@ -85,7 +85,32 @@
                     </ul>
                 </div>
             </li>
+
             {{-- end of permission --}}
+
+            {{-- Role start  --}}
+            {{-- permission start --}}
+            <li class="nav-item nav-category text-capitalize">Roles</li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#emails" role="button" aria-expanded="false"
+                    aria-controls="emails">
+                    <i class="link-icon" data-feather="mail"></i>
+                    <span class="link-title">Roles</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="collapse" id="emails">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="{{ route('role.index') }}" class="nav-link">All Roles</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pages/email/read.html" class="nav-link">Add Amenities</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </li>
+            {{-- end of Role  --}}
             <li class="nav-item">
                 <a href="pages/apps/calendar.html" class="nav-link">
                     <i class="link-icon" data-feather="calendar"></i>
@@ -94,8 +119,8 @@
             </li>
             <li class="nav-item nav-category">Components</li>
             <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="collapse" href="#uiComponents" role="button" aria-expanded="false"
-                    aria-controls="uiComponents">
+                <a class="nav-link" data-bs-toggle="collapse" href="#uiComponents" role="button"
+                    aria-expanded="false" aria-controls="uiComponents">
                     <i class="link-icon" data-feather="feather"></i>
                     <span class="link-title">UI Kit</span>
                     <i class="link-arrow" data-feather="chevron-down"></i>

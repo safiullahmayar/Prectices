@@ -1,7 +1,8 @@
 @extends('admin.layouts.app')
-<link rel="stylesheet" href="htp://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
-<script src="http://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+{{-- <link rel="stylesheet" href="htp://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css"> --}}
+
 @section('main')
+<script src="http://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <div class="main-wrapper">
 
         <!-- partial:partials/_sidebar.html -->
@@ -13,22 +14,22 @@
             <!-- partial:partials/_navbar.html -->
             @include('admin.layouts.header')
             <div class="page-content">
-                {{-- @if (Session::has('message'))
+                @if (Session::has('message'))
                     <div class="alert alert-success alert-dismissible" role="alert">
                         <button type="button" class="close" data-dismiss="alert">
                             <i class="fa fa-times">x</i>
                         </button>
                         <strong>Success !</strong> {{ session('message') }}
                     </div>
-                @endif --}}
-                @if (session('status'))
+                @endif
+                @if (session('message'))
                     <script>
-                        Swal.fire("{{ session('status') }}");
+                        Swal.fire("{{ session('message') }}");
                     </script>
                 @endif
                 <nav class="page-breadcrumb">
                     <ol class="breadcrumb">
-                        <a href="{{ route('create_permission') }}" class="btn btn-primary btn-lg ">Add New Permission </a>
+                        <a href="{{ route('create_role') }}" class="btn btn-primary btn-lg ">Add New role </a>
                     </ol>
                 </nav>
 
@@ -36,10 +37,10 @@
                     <div class="col-md-9 grid-margin stretch-card ">
                         <div class="card">
                             <div class="card-body">
-                                <h6 class="card-title">All Type Of Permission</h6>
+                                <h6 class="card-title">All Type Of role</h6>
 
                                 <div class="table-responsive" id="myTable">
-                                    @if ($permission)
+                                    @if ($role)
                                         <table id="dataTableExample" class="table">
                                             <thead>
                                                 <tr>
@@ -51,14 +52,14 @@
                                             </thead>
                                             <tbody>
 
-                                                @foreach ($permission as $item)
+                                                @foreach ($role as $item)
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
                                                         <td>{{ $item->name }}</td>
-                                                        <td> <a href="{{ route('permission.edit', ['id' => $item->id]) }}"
+                                                        <td> <a href="{{ route('role.edit', ['id' => $item->id]) }}"
                                                                 class="btn  btn-outline-success btn-sm text-center">Edit</a>
                                                             <a href="#" id="delete"
-                                                                onclick="deletepermission('{{ $item->id }}')"
+                                                                onclick="deleterole('{{ $item->id }}')"
                                                                 class="btn  btn-outline-danger btn-sm text-center">Delete</a>
 
                                                         </td>
@@ -85,7 +86,7 @@
         </div>
     </div>
     <script>
-        function deletepermission(id) {
+        function deleterole(id) {
             swal.fire({
                 title: 'Are you sure?',
                 text: "Delete This Data?",
@@ -96,7 +97,7 @@
                 confirmButtonText: 'Yes, delete it!'
             }).then(function(status) {
                 if (status.isConfirmed) {
-                    window.location.href = "/permission/delete/" + id;
+                    window.location.href = "/role/delete/" + id;
                     swal.fire(
                         'Deleted!',
                         'Your file has been deleted.',

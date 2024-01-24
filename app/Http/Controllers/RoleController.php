@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
@@ -11,7 +12,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        return view('page.role.index');
+        $role=Role::get();
+        return view('page.role.index',compact('role'));
     }
 
     /**
@@ -27,7 +29,15 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    $request->validate([
+        'name'=>'required',
+    ]);
+    Role::create(
+        [
+            'name'=>$request->name,
+        ]
+    );
+    return redirect()->route('role.index')->with('message', 'Role created successfully');
     }
 
     /**
@@ -43,7 +53,9 @@ class RoleController extends Controller
      */
     public function edit(string $id)
     {
-    return view('page.role.edit');
+        $role=Role::find($id);
+
+    return view('page.role.edit',compact('role'));
     }
 
     /**
@@ -51,7 +63,14 @@ class RoleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $role=Role::find($id);
+        $request->validate([
+            'name'=>'required',
+        ]);
+        $role->update([
+            'name'=>$request->name,
+        ]);
+        return redirect()->route('role.index')->with('message', 'updated successfully'); 
     }
 
     /**
@@ -59,6 +78,8 @@ class RoleController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $role=Role::find($id);
+        $role->delete();
+        return redirect()->route('role.index');
     }
 }
