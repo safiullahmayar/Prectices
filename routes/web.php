@@ -68,11 +68,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     // this is permission 
     Route::controller(PermissionController::class)->group(function () {
         Route::get('/permission/all', 'index')->name('permission.index');
-        Route::post('/property/add', 'store')->name('property.store');
-        Route::get('/property/create', 'create')->name('property.create');
-        Route::get('/property/edit/{id}', 'edit')->name('property.edit');
-        Route::post('/property/update/{id}', 'update')->name('property.update');
-        Route::get('/property/delete/{id}', 'destroy')->name('property.delete');
+        Route::get('/permission/create', 'create')->name('create_permission');
+        Route::post('/permission/add', 'store')->name('permission.store');
+        Route::get('/permission/edit/{id}', 'edit')->name('permission.edit');
+        Route::post('/permission/update/{id}', 'update')->name('permission.update');
+        Route::get('/permission/delete/{id}', 'destroy')->name('permission.delete');
     });
 });
 //  properties routes end

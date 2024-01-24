@@ -28,18 +28,18 @@
                 @endif
                 <nav class="page-breadcrumb">
                     <ol class="breadcrumb">
-                        <a href="{{ route('create_amenites') }}" class="btn btn-primary btn-lg ">Add amenite </a>
+                        <a href="{{ route('create_permission') }}" class="btn btn-primary btn-lg ">Add New Permission </a>
                     </ol>
                 </nav>
 
                 <div class="row">
-                    <div class="col-md-5 grid-margin stretch-card offset-3">
+                    <div class="col-md-9 grid-margin stretch-card ">
                         <div class="card">
                             <div class="card-body">
-                                <h6 class="card-title">All Type Of amenite</h6>
+                                <h6 class="card-title">All Type Of Permission</h6>
 
                                 <div class="table-responsive" id="myTable">
-                                    @if ($amenties)
+                                    @if ($permission)
                                         <table id="dataTableExample" class="table">
                                             <thead>
                                                 <tr>

@@ -14,7 +14,7 @@ class PermissionController extends Controller
     public function index()
     {
         $permission=Permission::get();
-        return view('page/permission/index',compact('permission'));
+        return view('page.permission.index',compact('permission'));
     }
 
     /**
@@ -22,7 +22,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        //
+        return view('page.permission.create');
     }
 
     /**
