@@ -14,7 +14,7 @@
             <!-- partial:partials/_navbar.html -->
             @include('admin.layouts.header')
             <div class="page-content">
-                <form class="forms-sample" method="post" action="{{ route('update_amenites',['id' => $amenties]) }}">
+                <form class="forms-sample" method="post" action="{{ route('update_amenites',['id' => $amenties->id]) }}">
                     <div class="row profile-body  ">
                         <div class="col-md-8 grid-margin stretch-card">
                             <div class="card w-75 h-100">

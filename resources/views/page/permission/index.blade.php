@@ -21,9 +21,9 @@
                         <strong>Success !</strong> {{ session('message') }}
                     </div>
                 @endif --}}
-                @if (session('message'))
+                @if (session('status'))
                     <script>
-                        Swal.fire("{{ session('message') }}");
+                        Swal.fire("{{ session('status') }}");
                     </script>
                 @endif
                 <nav class="page-breadcrumb">
@@ -61,10 +61,10 @@
 
 
 
-                                                        <td> <a href="{{ route('edit_amenites', ['id' => $item->id]) }}"
+                                                        <td> <a href="{{ route('permission.edit', ['id' => $item->id]) }}"
                                                                 class="btn  btn-outline-success btn-sm text-center">Edit</a>
                                                             <a href="#" id="delete"
-                                                                onclick="deleteamenite('{{ $item->id }}')"
+                                                                onclick="deletepermission('{{ $item->id }}')"
                                                                 class="btn  btn-outline-danger btn-sm text-center">Delete</a>
 
                                                         </td>
@@ -90,4 +90,26 @@
 
         </div>
     </div>
+    <script>
+        function deletepermission(id) {
+            swal.fire({
+                title: 'Are you sure?',
+                text: "Delete This Data?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then(function(status) {
+                if (status.isConfirmed) {
+                    window.location.href = "/permission/delete/" + id;
+                    swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    )
+                }
+            })
+        }
+    </script>
 @endsection

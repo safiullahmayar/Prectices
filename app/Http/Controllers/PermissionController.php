@@ -6,6 +6,7 @@ use Faker\Provider\ar_EG\Person;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+
 class PermissionController extends Controller
 {
     /**
@@ -13,8 +14,8 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        $permission=Permission::get();
-        return view('page.permission.index',compact('permission'));
+        $permission = Permission::get();
+        return view('page.permission.index', compact('permission'));
     }
 
     /**
@@ -30,7 +31,21 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'name' => 'required',
+            'group_name' => 'required',
+        ]);
+        if ($validate) {
+            Permission::create([
+                'name' => $request->name,
+                'group_name' => $request->group_name,
+            ]);
+            return redirect()->route('permission.index')->with('status', 'permission added successfully');
+        }
+        else
+        {
+            return redirect()->back()->with('status', 'permission not added');
+        }
     }
 
     /**
@@ -46,7 +61,8 @@ class PermissionController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $permission=permission::find($id);
+        return view('page.permission.edit',compact('permission'));
     }
 
     /**
@@ -54,7 +70,22 @@ class PermissionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+    $permission=permission::find($id);
+    $validate = $request->validate([
+        'name' =>'required',
+        'group_name' =>'required',
+    ]);
+    if ($validate) {
+        $permission->update([
+            'name' => $request->name,
+            'group_name' => $request->group_name,
+        ]);
+        return redirect()->route('permission.index')->with('status', 'permission updated successfully');
+    }
+    else {
+        return redirect()->back()->with('status', 'permission not updated');
+    }
     }
 
     /**
@@ -62,6 +93,8 @@ class PermissionController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $delete=Permission::find($id);
+        $delete->delete();
+        return redirect()->route('permission.index')->with('status', 'permission deleted successfully');
     }
 }
