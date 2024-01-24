@@ -44,9 +44,7 @@ class PermissionController extends Controller
                 'group_name' => $request->group_name,
             ]);
             return redirect()->route('permission.index')->with('status', 'permission added successfully');
-        }
-        else
-        {
+        } else {
             return redirect()->back()->with('status', 'permission not added');
         }
     }
@@ -64,8 +62,8 @@ class PermissionController extends Controller
      */
     public function edit(string $id)
     {
-        $permission=permission::find($id);
-        return view('page.permission.edit',compact('permission'));
+        $permission = permission::find($id);
+        return view('page.permission.edit', compact('permission'));
     }
 
     /**
@@ -74,21 +72,20 @@ class PermissionController extends Controller
     public function update(Request $request, string $id)
     {
 
-    $permission=permission::find($id);
-    $validate = $request->validate([
-        'name' =>'required',
-        'group_name' =>'required',
-    ]);
-    if ($validate) {
-        $permission->update([
-            'name' => $request->name,
-            'group_name' => $request->group_name,
+        $permission = permission::find($id);
+        $validate = $request->validate([
+            'name' => 'required',
+            'group_name' => 'required',
         ]);
-        return redirect()->route('permission.index')->with('status', 'permission updated successfully');
-    }
-    else {
-        return redirect()->back()->with('status', 'permission not updated');
-    }
+        if ($validate) {
+            $permission->update([
+                'name' => $request->name,
+                'group_name' => $request->group_name,
+            ]);
+            return redirect()->route('permission.index')->with('status', 'permission updated successfully');
+        } else {
+            return redirect()->back()->with('status', 'permission not updated');
+        }
     }
 
     /**
@@ -96,7 +93,7 @@ class PermissionController extends Controller
      */
     public function destroy(string $id)
     {
-        $delete=Permission::find($id);
+        $delete = Permission::find($id);
         $delete->delete();
         return redirect()->route('permission.index')->with('status', 'permission deleted successfully');
     }
@@ -107,12 +104,16 @@ class PermissionController extends Controller
     }
     public function export_permission()
     {
-        return Excel::download(new PermissionExport,'permission.xlsx');
+        return Excel::download(new PermissionExport, 'permission.xlsx');
     }
-    public function import() 
+    public function import(Request $request)
     {
-        Excel::import(new permissionImport, 'permission.xlsx');
-        
+        $request->validate([
+            'name' => 'required|mimes:xlsx',
+        ]);
+        $file = $request->name;
+        Excel::import(new permissionImport, $file);
+
         return redirect()->route('permission.index')->with('success', 'All good!');
     }
 }

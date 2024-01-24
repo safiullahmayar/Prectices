@@ -45,7 +45,10 @@
                                                     class="text-danger">*</span></label>
 
                                             <input type="file" class="form-control" id="" name="name"
-                                                autocomplete="off" placeholder="type name">
+                                                autocomplete="off" placeholder="type name" value="{{ old('name') }}"> 
+                                                @error('name')
+                                                    <span>{{ $message }}</span>
+                                                @enderror
                                         </div>
                                         <div class="mb-3">
                                             <button class="btn btn-warning " type="submit">Upload</button>

@@ -16,9 +16,8 @@ class permissionImport implements ToModel
     public function model(array $row)
     {
         return new Permission([
-            'name' => $row[1],
-            'gruard_name' => $row[2],
-            'group_name' => $row[3]
+            'name' => $row[0],
+            'group_name' => $row[1]
         ]);
     }
 }
