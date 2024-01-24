@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PermissionExport;
 use Faker\Provider\ar_EG\Person;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -96,5 +98,14 @@ class PermissionController extends Controller
         $delete=Permission::find($id);
         $delete->delete();
         return redirect()->route('permission.index')->with('status', 'permission deleted successfully');
+    }
+    // download permission Data
+    public function import_excel()
+    {
+        return view('page.permission.import_excel');
+    }
+    public function export_permission()
+    {
+        return Excel::download(new PermissionExport,'permission.xlsx');
     }
 }

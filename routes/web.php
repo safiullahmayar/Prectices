@@ -73,6 +73,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/permission/edit/{id}', 'edit')->name('permission.edit');
         Route::post('/permission/update/{id}', 'update')->name('permission.update');
         Route::get('/permission/delete/{id}', 'destroy')->name('permission.delete');
+        Route::get('/permission/import_excel', 'import_excel')->name('permission.import_excel');
+        Route::get('/permission/export', 'export_permission')->name('export_permission');
+
+
     });
 });
 //  properties routes end

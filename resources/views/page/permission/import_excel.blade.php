@@ -28,9 +28,7 @@
                 @endif
                 <nav class="page-breadcrumb">
                     <ol class="breadcrumb">
-                        <a href="{{ route('create_permission') }}" class="btn btn-primary btn-lg ">Add New Permission </a>
-                        <a href="{{ route('permission.import_excel') }}" class="btn btn-success mx-3">Import File</a>
-
+                        <a href="{{ route('export_permission') }}" class="btn btn-danger btn-lg "> Download</a>
                     </ol>
                 </nav>
 
@@ -38,47 +36,22 @@
                     <div class="col-md-9 grid-margin stretch-card ">
                         <div class="card">
                             <div class="card-body">
-                                <h6 class="card-title">All Type Of Permission</h6>
+                                <h6 class="card-title">Import Xls</h6>
 
                                 <div class="table-responsive" id="myTable">
-                                    @if ($permission)
-                                        <table id="dataTableExample" class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Name</th>
-                                                    <th>Group Name</th>
+                                    <form action="">
+                                        <div class="mb-3">
+                                            <label for="" class="form-label"> Import Xls file<span
+                                                    class="text-danger">*</span></label>
 
-                                                    <th>Action</th>
+                                            <input type="file" class="form-control" id="" name="name"
+                                                autocomplete="off" placeholder="type name">
+                                        </div>
+                                        <div class="mb-3">
+                                            <button class="btn btn-warning " type="submit">Upload</button>
+                                        </div>
+                                    </form>
 
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                                @foreach ($permission as $item)
-                                                    <tr>
-                                                        <td>{{ $loop->iteration }}</td>
-                                                        <td>{{ $item->name }}</td>
-                                                        <td>{{ $item->group_name }}</td>
-
-
-
-                                                        <td> <a href="{{ route('permission.edit', ['id' => $item->id]) }}"
-                                                                class="btn  btn-outline-success btn-sm text-center">Edit</a>
-                                                            <a href="#" id="delete"
-                                                                onclick="deletepermission('{{ $item->id }}')"
-                                                                class="btn  btn-outline-danger btn-sm text-center">Delete</a>
-
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    @else
-                                        <th class="text-light">
-                                            Not Found
-                                        </th>
-                                    @endif
                                 </div>
                             </div>
                         </div>
