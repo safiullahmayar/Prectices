@@ -122,6 +122,9 @@
                 <div class="collapse" id="emails">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
+                            <a href="{{ route('all_role_permission') }}" class="nav-link">All Permission</a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('permission_to_role') }}" class="nav-link">Permissio To Role</a>
                         </li>
 

@@ -89,6 +89,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/role/delete/{id}', 'destroy')->name('role.delete');
         // permission to role
         Route::get('/permission_role/index', 'permission_to_role')->name('permission_to_role');
+        Route::get('/permission_role/all_role_permission', 'all_role_permission')->name('all_role_permission');
+
+        Route::get('/permission_role/store', 'permission_store')->name('permission_store');
+
 
     });
 });
