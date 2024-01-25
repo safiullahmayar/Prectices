@@ -87,6 +87,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/role/edit/{id}', 'edit')->name('role.edit');
         Route::post('/role/update/{id}', 'update')->name('role.update');
         Route::get('/role/delete/{id}', 'destroy')->name('role.delete');
+        // permission to role
+        Route::get('/permission_role/index', 'permission_to_role')->name('permission_to_role');
+
     });
 });
 //  properties routes end

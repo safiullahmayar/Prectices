@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
@@ -82,4 +83,11 @@ class RoleController extends Controller
         $role->delete();
         return redirect()->route('role.index');
     }
-}
+    public function permission_to_role()
+
+{
+    $roles=Role::all();
+    $permission=Permission::get();
+    
+    return view('page.role.permission_to_role',compact('roles','permission'));
+}}
