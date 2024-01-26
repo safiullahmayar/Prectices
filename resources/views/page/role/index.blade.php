@@ -56,7 +56,7 @@
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
                                                         <td>{{ $item->name }}</td>
-                                                        <td> <a href="{{ route('role.edit', ['id' => $item->id]) }}"
+                                                        <td> <a href="{{ route('role.edit',['id' => $item->id]) }}"
                                                                 class="btn  btn-outline-success btn-sm text-center">Edit</a>
                                                             <a href="#" id="delete"
                                                                 onclick="deleterole('{{ $item->id }}')"

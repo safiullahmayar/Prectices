@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\permissionImport;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -110,5 +111,36 @@ class RoleController extends Controller
     {
         $role = Role::all();
         return view('page.role.permission_to_all', compact('role'));
+    }
+    public function role_permission_edit($id)
+    {
+        $roles = role::findOrFail($id);
+        $permission = Permission::get();
+        $permission_group = User::getpermissionGroup();
+
+        return view('page.role.edit_permission', compact('roles', 'permission', 'permission_group'));
+    }
+    public function role_permission_update(Request $request, $id)
+    {
+        $role = Role::findOrFail($id);
+
+        $permissions = $request->permission;
+
+        if (!empty($permissions)) {
+            $role->syncPermissions($permissions);
+        }
+
+        return redirect()->route('all_role_permission')->with('message', 'Permission added successfully');
+    }
+    public function role_permission_delete($id)
+    {
+        // dd($id);
+        $role=Role::find($id);
+        if(!is_null($role))
+        {
+            $role->delete();
+        }
+        return redirect()->route('all_role_permission')->with('status', 'Permission delete successfully');
+
     }
 }

@@ -66,14 +66,11 @@
                                                                 <span class="bg-success">{{ $perm->name }}</span>
                                                             @endforeach
                                                         </td>
+                                                        <td> <a href="{{ route('role_permission_edit', ['id' => $item->id]) }}"
+                                                                class="btn btn-outline-success btn-sm text-center">Edit</a>
 
-
-
-
-                                                        <td> <a href="{{ route('permission.edit', ['id' => $item->id]) }}"
-                                                                class="btn  btn-outline-success btn-sm text-center">Edit</a>
                                                             <a href="#" id="delete"
-                                                                onclick="deletepermission('{{ $item->id }}')"
+                                                                onclick="deleterole('{{ $item->id }}')"
                                                                 class="btn  btn-outline-danger btn-sm text-center">Delete</a>
 
                                                         </td>
@@ -100,7 +97,7 @@
         </div>
     </div>
     <script>
-        function deletepermission(id) {
+        function deleterole(id) {
             swal.fire({
                 title: 'Are you sure?',
                 text: "Delete This Data?",
@@ -110,8 +107,12 @@
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Yes, delete it!'
             }).then(function(status) {
+
                 if (status.isConfirmed) {
-                    window.location.href = "/permission/delete/" + id;
+
+                    window.location.href = '{{ route('role_permission_delete', ['id' => ':abc']) }}'.replace(':abc',
+                        id)
+                    // "role_permission_delete/" + id;
                     swal.fire(
                         'Deleted!',
                         'Your file has been deleted.',

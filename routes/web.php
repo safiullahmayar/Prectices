@@ -92,6 +92,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/permission_role/all_role_permission', 'all_role_permission')->name('all_role_permission');
 
         Route::get('/permission_role/store', 'permission_store')->name('permission_store');
+        Route::get('/permission_role/edit/{id}', 'role_permission_edit')->name('role_permission_edit');
+        Route::get('/permission_role/update/{id}', 'role_permission_update')->name('role_permission_update');
+        Route::get('/permission_role/delete/{id}', 'role_permission_delete')->name('role_permission_delete');
 
 
     });
